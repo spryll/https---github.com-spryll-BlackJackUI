@@ -1,10 +1,17 @@
 var _ante;
 var playingField = document.getElementById('playingField');
 var dealersHand = document.getElementById('dealer');
+var dealersScore = document.getElementById('space-3');
 var player0Hand = document.getElementById('player0');
+var player0Score = document.getElementById('space-6');
 var player1Hand = document.getElementById('player1');
+var player1Score = document.getElementById('space-12');
 var player2Hand = document.getElementById('player2');
+var player2Score = document.getElementById('space-14');
 var player3Hand = document.getElementById('player3');
+var userScore = document.getElementById('space-10');
+var roundOver = false;
+
 _startingMoneyAmount = 200;
 
 var _players = [new Player('Huey', _startingMoneyAmount),
@@ -19,7 +26,7 @@ function play( ) {
 }
 
 function hit( ) {
-    addCards( );
+    if ( !roundOver) if ( _dealer.scoreHand( _players[3].hands[0] ) < 21 ) addCards( )
 }
 
 function showDealerHand( ) {
@@ -36,6 +43,7 @@ function showDealerHand( ) {
 }
 
 function stay( ) {
+    roundOver = true;
     for ( let i = 0; i < _players.length; i++ ) {        
         //The dealer hand will not be completed if all players have either busted or received blackjack
         var dealerComplete = false;
@@ -50,6 +58,7 @@ function stay( ) {
    }
    if ( dealerComplete ) while ( _dealer.evaluateDealer() < 17) _dealer.deal()
    showDealerHand( );
+   dealersScore.innerHTML = dealersScore.innerHTML + "<br />" + _dealer.scoreHand( _dealer.dealerHand );
    printResults( _dealer, _players );
 }
 
@@ -120,6 +129,12 @@ function showPlayerCard( player, playerNumber ) {
 function addCards( ) {
     _dealer.deal( _players[3], 0 );
     showPlayerCard( _players[3], 3);
+    if ( _dealer.scoreHand( _players[3].hands[0] ) > 21 ) {
+        userScore.innerHTML = "You Lose";
+        stay();
+    } else {
+        userScore.innerHTML = "You " + _dealer.scoreHand( _players[3].hands[0] )
+    }
 }
 
 function addDots( ) {
@@ -184,4 +199,9 @@ function addDots( ) {
         let handIndex = 0;
         play( i, handIndex );
     }
+    
+    player0Score.innerHTML = player0Score.innerHTML + "<br />" + _dealer.scoreHand( _players[0].hands[0] );
+    player1Score.innerHTML = player1Score.innerHTML + "<br />" + _dealer.scoreHand( _players[1].hands[0] );
+    player2Score.innerHTML = player2Score.innerHTML + "<br />" + _dealer.scoreHand( _players[2].hands[0] );
+    userScore.innerHTML = userScore.innerHTML + "<br />" + _dealer.scoreHand( _players[3].hands[0] );
 }

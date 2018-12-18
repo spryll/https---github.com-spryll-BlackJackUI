@@ -2,24 +2,27 @@ header {
     display: flex;
     justify-content: space-evenly;
 }
+
 body {
-    background-color: green;
+    background-color: #6ab04c;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
 .grid-container {
     display: grid;
     grid-gap: 1px;
     grid-template-columns: auto auto auto auto auto;
-    background-color: green;
+    background-color: #6ab04c;
     padding: 10px;
     position:relative;
 }
+
 .grid-item {
-    /*background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);*/
     padding: 20px;
     font-size: 30px;
     text-align: center;
 }
+
 .dot {
     height: 70px;
     width: 70px;
@@ -27,20 +30,16 @@ body {
     text-align: center;
   }
 
-.correct-dot{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    display: inline-block;
+.button {
+    background-color: #fffa65;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    padding: 15px 32px;
     text-align: center;
-    background-color: green;
-}
-
-.incorrect-dot{    
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
+    text-decoration: none;
     display: inline-block;
-    text-align: center;
-    background-color: red;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
